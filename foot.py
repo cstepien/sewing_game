@@ -19,7 +19,6 @@ class Foot(Widget):
 
 	def __init__(self, **kwargs):
 		super(Foot, self).__init__(**kwargs)
-		self.size = Window.size
 
 		with self.canvas:
 			Color(1.0, 1.0, 1.0)
@@ -30,6 +29,7 @@ class Foot(Widget):
 		self.lines.points = self.recentered_verteces(new_center)
 
 	def recentered_verteces(self, coord):
+		#self.pos = coord
 		new_points = []
 		for index, num in enumerate(self.verteces):
 			if index%2 == 0:

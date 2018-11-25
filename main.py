@@ -15,6 +15,7 @@ class SewingGame(Widget):
 
 		self.foot = foot.Foot()
 		self.add_widget(self.foot)
+		self.foot.center_foot((self.center_x, self.center_y))
 		
 	def adapt(self, Inst, size):
 		self.foot.center_foot((self.center_x, self.center_y))
