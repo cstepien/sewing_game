@@ -11,7 +11,7 @@ class SewingGame(Widget):
 		super(SewingGame, self).__init__(**kwargs)
 		self.size = Window.size
 
-		self.add_widget(piece.Piece(""))
+		self.add_widget(piece.Piece("assets/CCDBlueTee.png"))
 
 		self.bind(size=self.adapt)
 		#self.on_size = self.adapt
