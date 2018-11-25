@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.anchorlayout import AnchorLayout
 import foot
+import piece
 from kivy.core.window import Window
 from kivy.graphics import Line
 
@@ -9,6 +10,8 @@ class SewingGame(Widget):
 	def __init__(self, **kwargs):
 		super(SewingGame, self).__init__(**kwargs)
 		self.size = Window.size
+
+		self.add_widget(piece.Piece(""))
 
 		self.bind(size=self.adapt)
 		#self.on_size = self.adapt
