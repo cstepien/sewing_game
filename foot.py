@@ -33,8 +33,8 @@ class Foot(Widget):
 		new_points = []
 		for index, num in enumerate(self.verteces):
 			if index%2 == 0:
-				new_points.append(self.verteces[index]+coord[0])
+				new_points.append(num+coord[0])
 			elif index%2 == 1:
-				new_points.append(self.verteces[index]+coord[1])
+				new_points.append(num+coord[1])
 
 		return new_points
