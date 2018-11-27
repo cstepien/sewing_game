@@ -18,10 +18,8 @@ class Piece(Scatter):
 		
 		self.instructions = InstructionGroup()
 		self.canvas.add(self.instructions)
-		# This starting point is incorrect - leads to drawing a line from (0,0) to first position for first line
-		# changing initial coords to self.center_x, self.center_y has the same result
-		# I think we need some special case in add_stitch_coord for the first stitch
-		self.stitch_coords = [(0,0)]
+
+		self.stitch_coords = []
 		print("Self size:", self.size, "texture size:", self.image.texture_size, "Scale:", self.scale)
 		#self.end_stitch((self.center_x, self.center_y))
 

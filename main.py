@@ -14,7 +14,7 @@ class SewingGame(Widget):
 
 		self.piece = piece.Piece("assets/CCDBlueTee.png")
 		self.add_widget(self.piece)
-		Clock.schedule_interval(self.needle_down, .2)
+		Clock.schedule_interval(self.needle_down, .1)
 
 		self.bind(size=self.adapt)
 		#self.on_size = self.adapt
