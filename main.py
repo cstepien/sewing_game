@@ -24,13 +24,12 @@ class SewingGame(Widget):
 		self.foot.center_foot((self.center_x, self.center_y))
 	
 	def adapt(self, Inst, size):
+		# can just change to non-tuple self.center below and center_foot above
 		self.foot.center_foot((self.center_x, self.center_y))
 
 	def needle_down(self, dt):
-		#figure out where the center is
-		foot_on_piece = (self.center_x - self.piece.pos[0], self.center_y - self.piece.pos[1])
 		#pass the center to self.piece.add_stitch_coord()
-		self.piece.add_stitch_coord(foot_on_piece)
+		self.piece.add_stitch_coord(self.center)
 
 
 class SewingApp(App):

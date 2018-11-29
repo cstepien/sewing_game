@@ -31,20 +31,20 @@ class Piece(Scatter):
 	def start_stitch(self, coord):
 		self.stitch_coords.append(coord)
 
-		# end_stitch currently can't deal with rotating the piece - it breaks the drawing function
-		# Probably due to coordinates being messed up relative to the screen
-		# there are options in Scatter to translate coordinates to scattered position
 	def end_stitch(self, coord):
 		self.stitch_coords.append(coord)
-		self.instructions.add(Line(points=[self.stitch_coords[-2][0]/self.scale, 
-			self.stitch_coords[-2][1]/self.scale, 
-			self.stitch_coords[-1][0]/self.scale,
-			self.stitch_coords[-1][1]/self.scale]))
+		self.instructions.add(Line(points=[self.stitch_coords[-2][0], 
+			self.stitch_coords[-2][1], 
+			self.stitch_coords[-1][0],
+			self.stitch_coords[-1][1]]))
 
 	def add_stitch_coord(self, coord):
+		coord = self.to_local(coord[0], coord[1])
 		if len(self.stitch_coords)%2==0:
 			self.start_stitch(coord)
 		else:
+			# check if end stitch is the same as prior stitch_coord - if yes, delete last stitch_coord
+			# and don't add current coord
 			self.end_stitch(coord)
 
 		print(self.stitch_coords)
