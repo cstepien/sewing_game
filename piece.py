@@ -1,5 +1,6 @@
 from kivy.uix.scatter import Scatter
 from kivy.uix.image import Image
+from kivy.core.image import Image as CoreImage
 from kivy.properties import StringProperty
 from kivy.graphics import *
 from kivy.graphics.instructions import InstructionGroup
@@ -10,7 +11,8 @@ class Piece(Scatter):
 		super(Piece, self).__init__(**kwargs)
 		self.auto_bring_to_front = False
 		self.source = source # consider using StringProperty later so we can update redraw with new sources
-		self.image = Image(source=self.source)
+		self.pattern = CoreImage.load(filename=self.source, keep_data=True)
+		self.image = Image(texture=self.pattern.texture)
 		self.scale = self.image.texture_size[0]/self.size[0]
 		self.do_scale = False	
 		self.add_widget(self.image)
@@ -22,12 +24,7 @@ class Piece(Scatter):
 		# if a is <1, don't do needle_down() - or skip adding stitches like in case of no movement of foot
 		self.stitch_coords = []
 		print("Self size:", self.size, "texture size:", self.image.texture_size, "Scale:", self.scale)
-		#self.end_stitch((self.center_x, self.center_y))
 
-		'''with self.canvas:
-			Color(1,1,1)
-			Line(points = [self.center_x, self.center_y, 0, 0])
-		'''
 
 	def start_stitch(self, coord):
 		self.stitch_coords.append(coord)
