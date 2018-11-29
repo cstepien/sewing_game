@@ -11,14 +11,15 @@ class Piece(Scatter):
 		self.auto_bring_to_front = False
 		self.source = source # consider using StringProperty later so we can update redraw with new sources
 		self.image = Image(source=self.source)
-		# why did we do scale again? 
 		self.scale = self.image.texture_size[0]/self.size[0]
 		self.do_scale = False	
 		self.add_widget(self.image)
 		
 		self.instructions = InstructionGroup()
 		self.canvas.add(self.instructions)
-
+		# get where the foot is, scale it up to the piece coords, round down (floor) to nearest pixels, 
+		# get rgba of that pixel coord
+		# if a is <1, don't do needle_down() - or skip adding stitches like in case of no movement of foot
 		self.stitch_coords = []
 		print("Self size:", self.size, "texture size:", self.image.texture_size, "Scale:", self.scale)
 		#self.end_stitch((self.center_x, self.center_y))
