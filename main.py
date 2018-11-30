@@ -14,10 +14,9 @@ class SewingGame(Widget):
 
 		self.piece = piece.Piece("assets/CCDBlueTee.png")
 		self.add_widget(self.piece)
-		Clock.schedule_interval(self.needle_down, .1)
+		Clock.schedule_interval(self.needle_down, 0.5)
 
 		self.bind(size=self.adapt)
-		#self.on_size = self.adapt
 
 		self.foot = foot.Foot()
 		self.add_widget(self.foot)
@@ -29,6 +28,10 @@ class SewingGame(Widget):
 	def needle_down(self, dt):
 		#pass the center to self.piece.add_stitch_coord()
 		self.piece.add_stitch_coord(self.center)
+		
+		# I don't know why this print statement doesn't work the way I want it to
+		# It just prints the same coord each time, (400,300), without updating it
+		print(self.center_x, self.center_y)
 
 
 class SewingApp(App):

@@ -25,6 +25,9 @@ class Piece(Scatter):
 		self.stitch_coords = []
 		print("Self size:", self.size, "texture size:", self.image.texture_size, "Scale:", self.scale)
 
+	def get_rgba(self, coord):
+		pixel_rgba = self.pattern.read_pixel(coord[0], coord[1])
+		print(pixel_rgba)
 
 	def start_stitch(self, coord):
 		self.stitch_coords.append(coord)
@@ -37,12 +40,20 @@ class Piece(Scatter):
 			self.stitch_coords[-1][1]]))
 
 	def add_stitch_coord(self, coord):
-		coord = self.to_local(coord[0], coord[1])
+		# self.get_rgba(coord)
+
+		local_coord = self.to_local(coord[0], coord[1])
+		# attempt to get pattern coordinates so we can then get rgba for each location
+		# pattern_coord still not working right - we get negative numbers
+		pattern_coord = (int(local_coord[0]*self.scale), int(local_coord[1]*self.scale))
+		print('Pattern coords:', pattern_coord)
+		# Again, I don't understand why my starting coord below is not updating but local coord is
+		# print('starting coord:', coord, 'local coord:', local_coord)
 		if len(self.stitch_coords)%2==0:
-			self.start_stitch(coord)
+			self.start_stitch(local_coord)
 		else:
 			# check if end stitch is the same as prior stitch_coord - if yes, delete last stitch_coord
 			# and don't add current coord
-			self.end_stitch(coord)
+			self.end_stitch(local_coord)
 
 		print(self.stitch_coords)
