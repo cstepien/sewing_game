@@ -27,11 +27,9 @@ class SewingGame(Widget):
 
 	def needle_down(self, dt):
 		#pass the center to self.piece.add_stitch_coord()
-		self.piece.add_stitch_coord(self.center)
-		
-		# I don't know why this print statement doesn't work the way I want it to
-		# It just prints the same coord each time, (400,300), without updating it
-		print(self.center_x, self.center_y)
+		print("Needle down center:", self.center)
+		print("Piece position:", self.piece.pos)
+		self.piece.add_stitch_coord(self.center, self.piece.pos)
 
 
 class SewingApp(App):
