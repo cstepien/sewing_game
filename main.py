@@ -14,7 +14,7 @@ class SewingGame(Widget):
 
 		self.piece = piece.Piece("assets/CCDBlueTee.png")
 		self.add_widget(self.piece)
-		Clock.schedule_interval(self.needle_down, 0.5)
+		Clock.schedule_interval(self.needle_down, .2)
 
 		self.bind(size=self.adapt)
 
@@ -26,10 +26,7 @@ class SewingGame(Widget):
 		self.foot.center_foot(self.center)
 
 	def needle_down(self, dt):
-		#pass the center to self.piece.add_stitch_coord()
-		print("Needle down center:", self.center)
-		print("Piece position:", self.piece.pos)
-		self.piece.add_stitch_coord(self.center, self.piece.pos)
+		self.piece.add_stitch_coord(self.center)
 
 
 class SewingApp(App):
