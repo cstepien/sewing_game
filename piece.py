@@ -41,6 +41,9 @@ class Piece(Scatter):
 
 	def add_stitch_coord(self, coord):
 		local_coord = self.to_local(coord[0], coord[1])
+		# The widget/app local coordinate (0,0) is in the lower left corner
+		# But the original pattern has (0,0) in the upper left (is 'upside down') compared to local
+		# Need to subtract scaled local coord from max y value of the pattern to make 'right side up'
 		pattern_coord = (int(local_coord[0]*self.scale), self.pattern.size[1] - int(local_coord[1]*self.scale))
 		alpha = self.get_alpha(pattern_coord)
 
