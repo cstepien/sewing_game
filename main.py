@@ -14,13 +14,25 @@ class SewingGame(Widget):
 
 		self.piece = piece.Piece("assets/CCDBlueTee.png")
 		self.add_widget(self.piece)
-		Clock.schedule_interval(self.needle_down, .2)
+		Clock.schedule_interval(self.needle_down, 2)
+		Clock.schedule_interval(self.detect_foot_on_pattern, 2)
 
 		self.bind(size=self.adapt)
 
 		self.foot = foot.Foot()
 		self.add_widget(self.foot)
 		self.foot.center_foot(self.center)
+
+		# I think the foot and the pattern are on different coord systems
+		# they are always colliding
+		# to debug, print out position of the foot vs. position of the pattern
+		# may need to do translation, or put the pattern on a different layer/parent
+	
+	def detect_foot_on_pattern(self, *args):
+		if self.foot.collide_widget(self.piece.pattern):
+			print('\n---- COLLISION! ---\n')
+		else:
+			print('no collision')
 	
 	def adapt(self, Inst, size):
 		self.foot.center_foot(self.center)

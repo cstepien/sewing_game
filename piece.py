@@ -27,6 +27,12 @@ class Piece(Scatter):
 		print("Self size:", self.size, "texture size:", self.image.texture_size, "Scale:", self.scale)
 		print("Pattern size:", self.fabric.size)
 
+	# add a function to check if coords are in range
+	def in_range(self, coord):
+		# if coord is in the range of the size of the piece, return True
+		# if not, return False
+		pass
+
 	def get_alpha(self, coord):
 		pixel_rgba = self.fabric.read_pixel(coord[0], coord[1])
 		print('alpha:', pixel_rgba[-1])
@@ -54,6 +60,7 @@ class Piece(Scatter):
 				local_coord, '\npattern coordinates:', pattern_coord)
 		
 		# can probably refactor below to be better
+		# update with checking whether coords are even in range
 		if alpha < 1:
 			print('\n--- NOT FABRIC! \n---')
 			if len(self.stitch_coords)%2==1:
