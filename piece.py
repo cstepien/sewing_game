@@ -50,17 +50,18 @@ class Piece(Scatter):
 		print('scatter size:', self.size, '\nstarting coord:', coord, '\nlocal coord:', 
 				local_coord, '\npattern coordinates:', pattern_coord)
 		
+		# can probably refactor below to be better
 		if alpha < 1:
-			print('\n--- NOT SHIRT! \n---')
-			# if a is <1, don't do needle_down() - or skip adding stitches like in case of no movement of foot
-			# if len self.stitch_coords is odd:
-			#    delete the last stitch_coord
+			print('\n--- NOT FABRIC! \n---')
+			if len(self.stitch_coords)%2==1:
+				del(self.stitch_coords[-1])
 		else:
-			print('\n ---  SHIRT! \n---')
+			print('\n ---  FABRIC! \n---')
 			if len(self.stitch_coords)%2==0:
 				self.start_stitch(local_coord)
 			else:
-				# check if end stitch is the same as prior stitch_coord - if yes, delete last stitch_coord
-				# and don't add current coord
-				self.end_stitch(local_coord)
+				if self.stitch_coords[-1] == local_coord:
+					del(self.stitch_coords[-1])
+				else: 
+					self.end_stitch(local_coord)
 		print(self.stitch_coords)
